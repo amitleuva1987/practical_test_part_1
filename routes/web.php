@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\DocumentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/login',[App\Http\Controllers\Auth\LoginController::class,'index']);
+Route::post('/login',[App\Http\Controllers\Auth\LoginController::class,'approve'])->name('login');
+Route::post('/logout',[App\Http\Controllers\Auth\LoginController::class,'logout'])->name('logout');
+
+Route::resource('/users',UserController::class);
+Route::resource('/documents',DocumentController::class);
