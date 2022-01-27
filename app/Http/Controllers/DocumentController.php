@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Document;
 use Illuminate\Http\Request;
 use App\Policies\DocumentPolicy;
+use App\Http\Requests\StoreDocument;
 
 class DocumentController extends Controller
 {
@@ -41,13 +42,8 @@ class DocumentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreDocument $request)
     {
-       $request->validate([
-           'document_name' => 'required',
-           'document_file' => 'required'
-       ]);
-       
        $path = $request->file('document_file')->store('documents/'.auth()->id());
 
        try{
